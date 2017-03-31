@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>jInvertScroll Demo Page</title>
+    <link rel="stylesheet" href="css/example.css" />
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="height:10%;">
+            <div class="container">
+                <div class="navbar-header">
+                    <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button> -->
+                    <a class="navbar-brand" href="#" style="font-family: Stencil Std;color: #808080;">
+    LN BUSINESS</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+
+                        <li style=" padding-left:30px; padding-top:10px; padding-right:100px; ">
+                            <div style="background-color:#808080;padding-right:5px;">
+                            <input type="text" style="width:350px; height:30px;background-color:#808080; border:0px; color:#fff;margin-left:5px;">
+                            <i class="fa  fa-2x fa-search" style="color:#fff; padding-top:5px;"></i>
+                        </div>
+                        </li>
+                        <li class="active">
+                            <a href="#" style="font-family:Stencil Std; font-size:24px; padding-left:25px; padding-right:25px; color: #fff;">F</a>
+                        </li>
+                        <li>
+                            <a href="#about" style="font-family:Stencil Std; font-size:24px; padding-left:25px; padding-right:25px; color: #808080;">M</a>
+                        </li>
+                                               <li style="height:50px;line-height:13px;padding-top:3px;">
+                            <p class="diary" style="padding-top:0px; padding-left:50px;color:#808080"><span class="day" style="font-family:Stencil Std; font-size:10px;">friday</span><br><span class="month" style="font-family:Stencil Std; font-size:10px;">March</span><br><span class="year" style="font-family:Stencil Std; font-size:10px;">2017</span></p>
+                        </li>
+                        <li style="height:50px;">
+                            <!--<hr style="width:0px; height:10px;" class="vertical" />-->
+                            <div style="border-left:2px solid #d3d3d3;margin-top:6px; margin-left:4px; margin-right:4px;height:40px;" class="line_div">
+</div>
+                        </li>
+                        <li style="height:50px; float:right;">
+                            <span class="date" style="font-family:Stencil Std; font-size:40px; padding-top:5px; padding-right:10px;color:#808080;">31</span>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+   
+    
+    <div class="horizon scroll">
+        <img src="images/horizon.png" alt="" />
+    </div>
+    <div class="middle scroll">
+        <img src="images/middle.png" alt="" />
+    </div>
+    <div class="front scroll">
+        <img src="images/front.png" alt="" />
+    </div>
+    <footer style="height:10%; background-color:#808080;">
+        svfsdvsdf
+    </footer>
+    <script type="text/javascript" src="../libs/jquery.min.js"></script>
+    <script type="text/javascript" src="../dist/js/jquery.jInvertScroll.js"></script>
+    <script type="text/javascript">
+    (function($) {
+        $.jInvertScroll(['.scroll'],        // an array containing the selector(s) for the elements you want to animate
+            {
+            height: 7000,                   // optional: define the height the user can scroll, otherwise the overall length will be taken as scrollable height
+            onScroll: function(percent) {   //optional: callback function that will be called when the user scrolls down, useful for animating other things on the page
+                console.log(percent);
+            }
+        });
+    }(jQuery));
+    </script>
+</body>
+</html>

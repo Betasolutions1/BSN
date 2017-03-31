@@ -1,3 +1,11 @@
+<?php 
+include'config.php';
+session_start();
+if(!$_SESSION['Email'])
+{
+	header("location:signup.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -86,29 +94,27 @@
                 <div class="row">
                 
                     <div class="title col-md-12">
-                    <h3 style="color:#fff;">Recent Topics</h3>
+                    <h3 style="color:#fff;">Category</h3>
 					</div>
                     <div class="col-md-12" >
-                    <div class="recent-post" style="color:#fff;overflow-y:scroll;width:230px">
-                    <h5>posts</h5>
+                    <div class="recent-post" style="color:#fff;overflow-y:scroll;width:230px;height:400px">
+                    
+                    <?php
+                        $dis_indu=mysqli_query($conn,"select * from add_industry");
+						while($ddii=mysqli_fetch_array($dis_indu))
+						{
+							$qt_cou_exe=mysqli_query($conn,"select * from question where INDUSTRY_ID='$ddii[INDUSTRY_ID]'");
+							$di_cou=mysqli_num_rows($qt_cou_exe);
+						?>                   
+                    
+                   <span><h5><?php echo $ddii['INDUSTRY_NAME'];?> &nbsp (<?php echo $di_cou;?>)</h5></span>
                     <hr>
-                    <h5>posts</h5>
-                    <hr>
-                    <h5>posts</h5>
-                    <hr>
-                    <h5>posts</h5>
-                    <hr>
-                    <h5>posts</h5>
-                    <hr>
-                    <h5>posts</h5>
-                    <hr>
-                    <h5>posts</h5>
-                    <hr>
+                    <?php } ?>
                     </div>                    
                     </div>
                     <div class="col-md-12">
                     <div style="background-color:#808080;padding-right:5px;">
-                            <input type="text" style="width:170px; height:30px;background-color:#fff; border:0px; color:#fff;margin-left:10px;">
+                            <input type="text" style="width:170px; height:30px;background-color:#fff; border:0px; color:;margin-left:10px;">
                             <i class="fa  fa-2x fa-search" style="color:#fff; padding:2px"></i>
                         </div>
                     </div>
@@ -130,7 +136,21 @@
                 </div>
                 
                 <div style="overflow-y:scroll;height:400px;">
+                
+                 <?php
+                                            $dis_geet_qut=mysqli_query($conn,"select * from question order by  q_id desc");
+											while($qust_d=mysqli_fetch_array($dis_geet_qut))
+											{
+												$ans=mysqli_query($conn,"select * from answered where `quest_id`='$qust_d[q_id]' ");
+												$ans2=mysqli_num_rows($ans);
+												$qusr_exe=mysqli_query($conn,"select * from users where user_id='$qust_d[user_id]'");
+												$quser=mysqli_fetch_array($qusr_exe);
+												$qusr_pic_exe=mysqli_query($conn,"select * from user_profile_pic where user_id='$quser[user_id]'");
+												$qusrpic=mysqli_fetch_array($qusr_pic_exe);
+											?>
+                
                 <div class="row" style="color:#fff">
+                
                 
                 <div class="col-md-10" align="right" style="margin-left:80px;margin-right:-80px;color:#fff;">
                 
@@ -140,17 +160,17 @@
                 <div class="col-md-12" style="color:#fff;">
                 <div class="row">
                 <div class="col-md-2" align="left" >
-                <span style="margin-left:-80px;color:#fff;">abc</span>
+                <span style="margin-left:-80px;color:#fff;" class="glyphicon glyphicon-comment"></span>&nbsp;+<?php echo $ans2;?> 
                 </div>
                 <div class="col-md-10" >
-                <h5 >Question</h5>
+                <h5 ><?php echo $qust_d['question'];?></h5>
                 </div>
                 
                 <div class="col-md-2" align="left" >
-                <span style="margin-left:-80px;color:#fff;">abc</span>
+                <span style="margin-left:-80px;color:#fff;"><?php echo $qust_d['datetime'];?></span>
                 </div>
                 <div class="col-md-10" style="color:#fff;">
-                <h5 >fg</h5>
+                <span><?php echo $quser['Name'];?>/<?php echo $quser['designation'];?>/<?php echo $quser['company'];?>/<?php echo $quser['industry'];?></span>
                 </div>
                 </div>
                 </div>
@@ -159,182 +179,32 @@
                 
                 
                 </div>
-                
+                <?php
+                                                    if($qusrpic['image']!='')
+													{
+													?>
                 <div class="col-md-2" align="right">
-                <img src="file:///Z|/kanchanImages/1455951159MODA 618.jpg" class="img-circle" height="50" width="50" alt="">
+                <img src="fb_users/<?php echo $quser['Gender']?>/<?php echo $quser['Email'];?>/Profile/<?php echo $qusrpic['image'];?>" class="img-circle" height="50" width="50" alt="">
                
                 </div>
+                     <?php
+													}else
+													{
+														?>
+                                                        <img src="images/profile/sq.PNG" width="80px" style="margin-left:0px;" >
+                                                        <?php
+													}
+														?>
                 
                 </div>
                 
                 <div class="hr">
                 <hr>
                 </div>
-                 <div class="row" style="color:#fff">
                 
-                <div class="col-md-10" align="right" style="margin-left:80px;margin-right:-80px;color:#fff;">
+                <?php } ?>
+             
                 
-                
-                
-                <div class="row">
-                <div class="col-md-12" style="color:#fff;">
-                <div class="row">
-                <div class="col-md-2" align="left" >
-                <span style="margin-left:-80px;color:#fff;">abc</span>
-                </div>
-                <div class="col-md-10" >
-                <h5 >Question</h5>
-                </div>
-                
-                <div class="col-md-2" align="left" >
-                <span style="margin-left:-80px;color:#fff;">abc</span>
-                </div>
-                <div class="col-md-10" style="color:#fff;">
-                <h5 >fg</h5>
-                </div>
-                </div>
-                </div>
-                </div>
-                
-                
-                
-                </div>
-                
-                <div class="col-md-2" align="right">
-                <img src="file:///Z|/kanchanImages/1455951159MODA 618.jpg" class="img-circle" height="50" width="50" alt="">
-               
-                </div>
-                
-                </div>
-                
-                  <div class="hr">
-                <hr>
-                </div>
-                
-                
-                <div class="row" style="color:#fff">
-                
-                <div class="col-md-10" align="right" style="margin-left:80px;margin-right:-80px;color:#fff;">
-                
-                
-                
-                <div class="row">
-                <div class="col-md-12" style="color:#fff;">
-                <div class="row">
-                <div class="col-md-2" align="left" >
-                <span style="margin-left:-80px;color:#fff;">abc</span>
-                </div>
-                <div class="col-md-10" >
-                <h5 >Question</h5>
-                </div>
-                
-                <div class="col-md-2" align="left" >
-                <span style="margin-left:-80px;color:#fff;">abc</span>
-                </div>
-                <div class="col-md-10" style="color:#fff;">
-                <h5 >fg</h5>
-                </div>
-                </div>
-                </div>
-                </div>
-                
-                
-                
-                </div>
-                
-                <div class="col-md-2" align="right">
-                <img src="file:///Z|/kanchanImages/1455951159MODA 618.jpg" class="img-circle" height="50" width="50" alt="">
-               
-                </div>
-                
-                </div>
-                
-                  <div class="hr">
-                <hr>
-                </div>
-                
-                
-                <div class="row" style="color:#fff">
-                
-                <div class="col-md-10" align="right" style="margin-left:80px;margin-right:-80px;color:#fff;">
-                
-                
-                
-                <div class="row">
-                <div class="col-md-12" style="color:#fff;">
-                <div class="row">
-                <div class="col-md-2" align="left" >
-                <span style="margin-left:-80px;color:#fff;">abc</span>
-                </div>
-                <div class="col-md-10" >
-                <h5 >Question</h5>
-                </div>
-                
-                <div class="col-md-2" align="left" >
-                <span style="margin-left:-80px;color:#fff;">abc</span>
-                </div>
-                <div class="col-md-10" style="color:#fff;">
-                <h5 >fg</h5>
-                </div>
-                </div>
-                </div>
-                </div>
-                
-                
-                
-                </div>
-                
-                <div class="col-md-2" align="right">
-                <img src="file:///Z|/kanchanImages/1455951159MODA 618.jpg" class="img-circle" height="50" width="50" alt="">
-               
-                </div>
-                
-                </div>
-                
-                  <div class="hr">
-                <hr>
-                </div>
-                
-                <div class="row" style="color:#fff">
-                
-                <div class="col-md-10" align="right" style="margin-left:80px;margin-right:-80px;color:#fff;">
-                
-                
-                
-                <div class="row">
-                <div class="col-md-12" style="color:#fff;">
-                <div class="row">
-                <div class="col-md-2" align="left" >
-                <span style="margin-left:-80px;color:#fff;">abc</span>
-                </div>
-                <div class="col-md-10" >
-                <h5 >Question</h5>
-                </div>
-                
-                <div class="col-md-2" align="left" >
-                <span style="margin-left:-80px;color:#fff;">abc</span>
-                </div>
-                <div class="col-md-10" style="color:#fff;">
-                <h5 >fg</h5>
-                </div>
-                </div>
-                </div>
-                </div>
-                
-                
-                
-                </div>
-                
-                <div class="col-md-2" align="right">
-                <img src="file:///Z|/kanchanImages/1455951159MODA 618.jpg" class="img-circle" height="50" width="50" alt="">
-               
-                </div>
-                
-                </div>
-                
-                  <div class="hr">
-                <hr>
-                </div>
                 </div>
                 <!--forum end-->
                 
